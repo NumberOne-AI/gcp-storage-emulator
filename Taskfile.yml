@@ -1,0 +1,10 @@
+---
+version: "3"
+
+includes:
+  service: ../../../.tasks/service.yml
+
+vars:
+  TARGET: gcp-storage-emulator
+
+tasks:  {}

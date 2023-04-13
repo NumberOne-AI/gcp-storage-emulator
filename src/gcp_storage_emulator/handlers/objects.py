@@ -2,6 +2,7 @@ import hashlib
 import json
 import logging
 import math
+import os
 import re
 import secrets
 import string
@@ -239,7 +240,8 @@ def _create_resumable_upload(request, response, storage):
             "upload_id": id,
         }
     )
-    response["Location"] = request.full_url + "&{}".format(encoded_id)
+    #response["Location"] = request.full_url + "&{}".format(encoded_id)
+    response["Location"] = request.full_url.replace("0.0.0.0", os.getenv("EXTERNAL_HOST")) + "&{}".format(encoded_id)
 
 
 def _delete(storage, bucket_name, object_id):

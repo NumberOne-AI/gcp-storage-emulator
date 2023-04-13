@@ -15,4 +15,4 @@ COPY src src/
 RUN pip install .
 
 ENTRYPOINT ["gcp-storage-emulator"]
-CMD ["start"]
+CMD ["start", "--default-bucket=n1-machina-file-config,n1-machina-csv-store"]

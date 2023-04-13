@@ -403,8 +403,11 @@ class Server(object):
     def __init__(self, host, port, in_memory, default_bucket=None, data_dir=None):
         self._storage = Storage(use_memory_fs=in_memory, data_dir=data_dir)
         if default_bucket:
-            logger.debug('[SERVER] Creating default bucket "{}"'.format(default_bucket))
-            buckets.create_bucket(default_bucket, self._storage)
+            logger.debug('[SERVER] Creating default bucket(s) "{}"'.format(default_bucket))
+            default_buckets = default_bucket.split(",")
+            for bucket in default_buckets:
+                logger.debug('[SERVER] Creating bucket "{}"'.format(bucket))
+                buckets.create_bucket(bucket, self._storage)
         self._api = APIThread(host, port, self._storage)
 
     def start(self):
